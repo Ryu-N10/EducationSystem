@@ -15,6 +15,15 @@ return new class extends Migration
     {
         Schema::create('delivery_times', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('curriculums_id')
+                  ->comment('カリキュラムID(curriculumsテーブルのidと紐づく)')
+                  ->constrained('curriculums')
+                  ->onDelete('cascade');
+
+            $table->dateTime('delivery_from')->comment('公開開始日');
+            $table->dateTime('delivery_to')->comment('公開終了日');
+            
             $table->timestamps();
         });
     }
